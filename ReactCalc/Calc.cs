@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace ReactCalc
 {
+    /// <summary>
+    /// Калькулятор
+    /// </summary>
     class Calc
     {
-        public Calc(int x) { X = x; }
-        public int X { get; private set; }
-        public static int Y { get; set; }
-        public string s { get { return $"{X + Y}"; } }
+        /// <summary>
+        /// Сумма
+        /// </summary>
+        /// <param name="x">Слагаемое</param>
+        /// <param name="y">Слагаемое</param>
+        /// <returns>Целое число</returns>
+        public int Sum(int x, int y)
+        {
+            return x + y;
+        }
     }
 }

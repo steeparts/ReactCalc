@@ -10,19 +10,46 @@ namespace ReactCalc
     {
         static void Main(string[] args)
         {
+            int x = 0;
+            int y = 0;
+            var calc = new Calc();
 
-            var c = new Calc(1);
-            //c.X = 1;
-            Calc.Y = 1;
-            Console.WriteLine(c.s);
+            if (args.Length > 0)
+            {
+                x = ToInt(args[0], 1000);
+                y = ToInt(args[1], 999);
+            }
+            else
+            {
+                #region Ввод данных
 
-            var d = new Calc(2);
-            //Calc.Y = 2;
-            //d.X = 2;
-            Console.WriteLine(d.s);
+                Console.Write("Введите x -> ");
+                var strx = Console.ReadLine();
+                x = ToInt(strx, 100);
 
-            Console.ReadKey();
+                Console.Write("Введите y -> ");
+                var stry = Console.ReadLine();
+                y = ToInt(stry, 99);
 
+                #endregion
+            }
+
+            var result = calc.Sum(x, y);
+
+            Console.WriteLine($"Сумма = {result}");
+
+            Console.ReadKey();                        
+        }
+
+        private static int ToInt(string arg, int def = 100)
+        {
+            int x;
+            if (!int.TryParse(arg, out x))
+            {
+                x = def;
+            }
+
+            return x;
         }
     }
 }
