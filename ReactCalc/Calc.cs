@@ -18,9 +18,18 @@ namespace ReactCalc
         public Calc()
         {
             Operations = new List<IOperation>();
-            Operations.Add(new SumOperation());
 
-            var dllName = Directory.GetCurrentDirectory() + "\\FactorialLibrary.dll";
+            Operations.Add(new SumOperation());
+            Operations.Add(new DifOperation());
+            Operations.Add(new MulOperation());
+            Operations.Add(new DivOperation());
+
+            CheckDllAndAdd(Directory.GetCurrentDirectory() + "\\AdditionalLibrary.dll");
+            CheckDllAndAdd(Directory.GetCurrentDirectory() + "\\FactorialLibrary.dll");            
+        }
+
+        private void CheckDllAndAdd(string dllName)
+        {
             if (!File.Exists(dllName))
                 return;
 
@@ -80,11 +89,6 @@ namespace ReactCalc
             return f(args);
         }
 
-
-
-
-
-
         /// <summary>
         /// Сумма
         /// </summary>
@@ -103,9 +107,10 @@ namespace ReactCalc
         /// <param name="x">Уменьшаемое</param>
         /// <param name="y">Вычитаемое</param>
         /// <returns>Вещественное число</returns>
+        [Obsolete("Используйте Execute('Dif', new[] { x, y }). Данная функция будет удалена в версии 4.0")]
         public double Dif(double x, double y)
         {
-            return x - y;
+            return Execute("Dif", new[] { x, y });
         }
 
         /// <summary>
@@ -113,9 +118,10 @@ namespace ReactCalc
         /// <param name="x">Множимое</param>
         /// <param name="y">Множитель</param>
         /// <returns>Вещественное число</returns>
+        [Obsolete("Используйте Execute('Mul', new[] { x, y }). Данная функция будет удалена в версии 4.0")]
         public double Mul(double x, double y)
         {
-            return x * y;
+            return Execute("Mul", new[] { x, y });
         }
 
         /// <summary>
@@ -124,29 +130,10 @@ namespace ReactCalc
         /// <param name="x">Делимое</param>
         /// <param name="y">Делитель</param>
         /// <returns>Вещественное число</returns>
+        [Obsolete("Используйте Execute('Div', new[] { x, y }). Данная функция будет удалена в версии 4.0")]
         public double Div(double x, double y)
         {
-            return x / y;
-        }
-
-        /// <summary>
-        /// Квадратный корень
-        /// </summary>
-        /// <param name="x">Неотрицательное число</param>
-        /// <returns>Вещественное число</returns>
-        public double Sqrt(double x)
-        {
-            return Math.Sqrt(x);
-        }
-
-        /// <summary>
-        /// Кубический корень
-        /// </summary>
-        /// <param name="x">Число</param>
-        /// <returns>Вещественное число</returns>
-        public double CRoot(double x)
-        {
-            return Math.Pow(x, 1.0 / 3);
+            return Execute("Div", new[] { x, y });
         }
     }
 }

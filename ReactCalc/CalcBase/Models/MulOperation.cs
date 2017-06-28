@@ -6,26 +6,30 @@ using System.Threading.Tasks;
 
 namespace ReactCalc.Models
 {
-    public class SumOperation : Operation
+    public class MulOperation : Operation
     {
         public override long Code
         {
-            get { return 1; }
+            get { return 3; }
         }
 
         public override string Desc
         {
-            get { return "Сумма"; }
+            get { return "Произведение"; }
         }
 
         public override string Name
         {
-            get { return "Sum"; }
+            get { return "Mul"; }
         }
 
         public override double Execute(double[] args)
         {
-            return args.Sum();
+            double result = 1.0;
+            foreach (double x in args)
+                result *= x;
+
+            return result;
         }
     }
 }

@@ -11,7 +11,6 @@ namespace TestCalc
         public void TestSum()
         {
             var calc = new Calc();
-            //var x = calc.Sum(1, 2);
             var x = calc.Execute("Sum", new[] { 1.0, 2.0 });
 
             Assert.AreEqual(x, 3);
@@ -21,25 +20,35 @@ namespace TestCalc
         }
 
         [TestMethod]
-        public void TestDiv()
+        public void TestDif()
         {
             var calc = new Calc();
-            var x = calc.Div(2, 2);
-            var y = calc.Div(2, 0);
+            var x = calc.Execute("Dif", new[] { 100.0, 82.0 });
 
-            Assert.AreEqual(x, 1);
-            Assert.AreEqual(y, double.PositiveInfinity);
+            Assert.AreEqual(x, 18);
+            Assert.AreEqual(calc.Execute("Dif", new[] { 0.0, 0.0 }), 0);
+            Assert.AreEqual(calc.Execute("Dif", new[] { -1.0, 2.0 }), -3);
+            Assert.AreEqual(calc.Execute("Dif", new[] { 0.0, 3.0 }), -3);
         }
 
         [TestMethod]
-        public void TestSqrt()
+        public void TestMul()
         {
             var calc = new Calc();
-            var x = calc.Sqrt(4);
+            var x = calc.Execute("Mul", new[] { 5.0, 8.0 });
 
-            Assert.AreEqual(x, 2);
-            Assert.AreEqual(calc.Sqrt(0), 0);
-            Assert.AreEqual(calc.Sqrt(9), 3);
+            Assert.AreEqual(x, 40);
+            Assert.AreEqual(calc.Execute("Mul", new[] { -10.0, -1.1 }), 11);
+        }
+
+        [TestMethod]
+        public void TestDiv()
+        {
+            var calc = new Calc();
+            var x = calc.Execute("Div", new[] { 5.0, 5.0 });
+
+            Assert.AreEqual(x, 1);
+            Assert.AreEqual(calc.Execute("Div", new[] { 100.0, 0.0 }), double.PositiveInfinity);
         }
     }
 }

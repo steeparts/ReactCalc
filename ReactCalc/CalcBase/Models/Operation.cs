@@ -10,6 +10,8 @@ namespace ReactCalc.Models
     {
         public abstract string Name { get; }
 
+        public abstract string Desc { get; }
+
         public abstract long Code { get; }
 
         public abstract double Execute(double[] args);

@@ -10,6 +10,8 @@ namespace ReactCalc.Models
     {
         string Name { get; }
 
+        string Desc { get; }
+
         long Code { get; }
 
         double Execute(double[] args);

@@ -51,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdditionalLibrary\AdditionalLibrary.csproj">
+      <Project>{26da2363-e46f-42aa-8449-cf53e8e2c2f1}</Project>
+      <Name>AdditionalLibrary</Name>
+    </ProjectReference>
     <ProjectReference Include="..\FactorialLibrary\FactorialLibrary.csproj">
       <Project>{94b81081-5f6a-4b88-964b-5531763beb70}</Project>
       <Name>FactorialLibrary</Name>
