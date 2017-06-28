@@ -35,43 +35,52 @@ namespace ReactCalc
                 #endregion
             }
 
-            Console.WriteLine("Сумма Sum");
-            Console.WriteLine("Разность Dif");
-            Console.WriteLine("Произведение Mul");
-            Console.WriteLine("Частное Div");
-            Console.WriteLine("Квадратный корень Sqrt");
-            Console.WriteLine("Кубический корень Croot");
-            Console.Write("-> ");
-            oper = Console.ReadLine();
-
-            try
+            while(true)
             {
-                var result = calc.Execute(oper, new[] { x, y });
-                Console.WriteLine($"{oper}({x}, {y}) = {result}");
-            }
-            catch(NotSupportedException ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
+                Console.WriteLine("1. Сумма Sum");
+                Console.WriteLine("2. Разность Dif");
+                Console.WriteLine("3. Произведение Mul");
+                Console.WriteLine("4. Частное Div");
+                Console.WriteLine("5. Квадратный корень Sqrt");
+                Console.WriteLine("6. Возведение в степень Sqr");
+                Console.WriteLine("7. Факториал Fact");
+                Console.WriteLine("0. Выход Exit");
+                Console.Write("-> ");
+                oper = Console.ReadLine();
 
-            //switch (c)
-            //{
-            //    case 0: break;
-            //    case 1: Console.WriteLine($"{x} + {y} = {calc.Sum(x, y)}"); break;
-            //    case 2: Console.WriteLine($"{x} - {y} = {calc.Dif(x, y)}"); break;
-            //    case 3: Console.WriteLine($"{x} * {y} = {calc.Mul(x, y)}"); break;
-            //    case 4:
-            //        {
-            //            if (y != 0)
-            //                Console.WriteLine($"{x} / {y} = {calc.Div(x, y)}");
-            //            else
-            //                Console.WriteLine($"{x} / {y} = Ошибка деления на ноль");
-            //        }; break;
-            //    case 5: Console.WriteLine($"Sqrt({x}) = {calc.Sqrt(x)}"); break;
-            //    case 6: Console.WriteLine($"Croot({x}) = {calc.CRoot(x)}"); break;
-            //}
+                if (oper == "Exit")
+                    return;
 
-            Console.ReadKey();
+                try
+                {
+                    var result = calc.Execute(oper, new[] { x, y });
+
+                    var oper_desc = "";
+                    foreach (var o in calc.Operations)
+                        if (o.Name == oper)
+                            oper_desc = o.Desc;
+
+                    switch (oper)
+                    {
+                        case "Sum":
+                        case "Dif":
+                        case "Mul":
+                        case "Div":
+                        case "Sqr": Console.WriteLine($"{oper_desc}({x}, {y}) = {result}"); break;
+                        case "Sqrt":
+                        case "Fact": Console.WriteLine($"{oper_desc}({x}) = {result}"); break;
+                        case "Exit": break;
+                        default: Console.WriteLine("Ошибка"); break;
+                    }
+                }
+                catch (NotSupportedException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+                Console.WriteLine();
+
+            }
         }
 
         private static double ToDouble(string arg, double def = 100.0)
